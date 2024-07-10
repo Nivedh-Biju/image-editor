@@ -11,7 +11,8 @@
     'slider sidebar';
     height: 100vh;
     width: 100vw;
-    background-color: #dadada;
+    background-color: #333;
+    overflow: auto;
   }
 
   .main-image{
@@ -22,29 +23,38 @@
 
   .sidebar{
     grid-area: sidebar;
-    background-color: hsl(265,100%,86%);
-    border-left: hsl(265, 100%, 56%);
+    background-color: #272525;
+    border-left: #333;
     display: flex;
+    align-items: center;
     flex-direction: column;
     align-items: stretch;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    overflow-y: scroll;
+    width: 20rem;
   }
 
   .sidebar-item{
     cursor: pointer;
     border: none;
     outline: none;
-    background-color: hsl(265,100%,86%);
+    background-color: #272525;
     padding: 1rem;
     position: relative;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
     transition: 150ms;
   }
 
   .sidebar-item:hover,.sidebar-item:focus{
-    background-color: hsl(265,100%,76%);
+    background-color: hsl(265, 96%, 56%);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
 
   .sidebar-item.active{
-    background-color: hsl(265, 100%, 70%);
+    background-color: hsl(265, 96%, 56%);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
 
   .sidebar-item::after{
@@ -72,25 +82,91 @@
   .slider{
     width: 100%;
     cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    height: 8px;
+    background: hsl(265, 96%, 56%);
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
   }
 
   #myCanvas{
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 5px;
   }
 
   #myCanvas1{
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 5px;
   }
 
   #myCanvas2{
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 5px;
   }
+
+  .button{
+    flex: 0 0 5%;
+    margin: 1rem;
+    color: white;
+    height: 3rem;
+    background-color: #1a1919;
+    border-radius: 1.5rem;
+    border: solid 1px hsl(265, 96%, 56%);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+
+  .button:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    background-color: hsl(265, 96%, 56%);
+  }
+
+
+  /* .slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    max-width: 300px;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+  } */
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  /* .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: tomato;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: tomato;
+    cursor: pointer;
+    border-radius: 50%;
+  } */
+  

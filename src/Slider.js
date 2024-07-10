@@ -1,4 +1,6 @@
+import { Box, SliderFilledTrack, SliderThumb, SliderTrack } from '@chakra-ui/react';
 import React from 'react';
+import './App.css';
 
 const Slider = ({ min, max, value, handleChange }) => {
   return (

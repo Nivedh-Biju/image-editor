@@ -1,9 +1,11 @@
 import './App.css';
 import SideBar from './SideBar';
 import Slider from './Slider';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import DEFAULT_OPTIONS from './util';
 import { Box } from '@chakra-ui/react'
+import { FaFileImage } from "react-icons/fa";
+import Loader from './loader';
 
 
 function getImageStyle(options) {
@@ -302,6 +304,7 @@ function AppOld() {
   
 
   return (
+    <Suspense fallback={<Loader/>}>
     <div className="container">
     <Box
       p={4}
@@ -319,7 +322,7 @@ function AppOld() {
         onMouseUp={enableDraw ? finishDrawing : handleMouseUpCrop}
         onMouseMove={enableDraw ? draw: handleMouseMoveCrop}
         onMouseOut={enableDraw ? finishDrawing : handleMouseUpCrop}
-      />
+      /> 
       <canvas
         id='myCanvas1'
         ref={cropOverlayRef}
@@ -352,67 +355,77 @@ function AppOld() {
             }}
           />
         ))}
+          <label className="file-upload">
+             Upload Image
+            <input type="file" accept="image/*" onChange={handleImageChange} className="file-upload" />
+            </label>
         <button onClick={handleDownload} className='button'>Download Modified Image</button>
         <button onClick={handleEnableDraw} className='button'>Drawing</button>
 
         <div>
-          <label>
+          <label className='label'>
             Brush Color:
+          </label>
             <input
               type="color"
               value={brushColor}
               onChange={handleBrushColorChange}
+              className='input-field'
             />
-          </label>
         </div>
         <div>
-          <label>
+          <label className='label'>
             Brush Width:
+          </label>
             <input
-              type="number"
+              type="range"
               value={brushWidth}
               onChange={handleBrushWidthChange}
               min="1"
               max="100"
+              className='input-field'
             />
-          </label>
         </div>
 
         <div>
-  <label>
+  <label className='label'>
     Canvas Width:
+  </label>
     <input
       type="number"
       value={canvasWidth}
       onChange={(e) => setCanvasWidth(parseInt(e.target.value))}
+      className='input-field'
     />
-  </label>
 </div>
 <div>
-  <label>
+  <label className='label'>
     Canvas Height:
+  </label>
     <input
       type="number"
       value={canvasHeight}
       onChange={(e) => setCanvasHeight(parseInt(e.target.value))}
+      className='input-field'
     />
-  </label>
 </div>
 <div>
-  <label>
+  <label className='label'>
     Rotation Angle (degrees):
-    <input
-      type="number"
-      value={rotationAngle}
-      onChange={(e) => setRotationAngle(parseInt(e.target.value))}
-    />
   </label>
+  <input
+  type="range"
+  min="0"
+  max="360"
+  value={rotationAngle}
+  onChange={(e) => setRotationAngle(parseInt(e.target.value))}
+  className='input-field'
+/>
 </div>
 <button onClick={() => handleResize(canvasWidth, canvasHeight)} className='button'>Resize Canvas</button>
 <button onClick={() => setIsCrropping(true)} className='button'>Crop</button>
 <button onClick={handleUndo} disabled={presentIndex <= 0} className='button'>Undo</button>
 {/* <button onClick={handleRedo} disabled={presentIndex >= history.length - 1}>Redo</button> */}
-<input type="file" accept="image/*" onChange={handleImageChange} />
 
       </div>
       <Slider
@@ -422,6 +435,7 @@ function AppOld() {
         handleChange={handleSliderChange}
       />
     </div>
+</Suspense>
   );
 }
 

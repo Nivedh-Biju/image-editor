@@ -5,6 +5,7 @@ import './App.css';
 const Slider = ({ min, max, value, handleChange }) => {
   return (
     <div className="slider-container">
+      <span className="slider-value">{value}</span>
       <input
         type="range"
         className="slider"

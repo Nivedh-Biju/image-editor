@@ -4,7 +4,11 @@ import Slider from './Slider';
 import { useState, useRef, useEffect, Suspense } from 'react';
 import DEFAULT_OPTIONS from './util';
 import { Box } from '@chakra-ui/react'
-import { FaFileImage } from "react-icons/fa";
+import { FaFileImage, FaFileDownload } from "react-icons/fa";
+import { PiScribbleThin } from "react-icons/pi";
+import { CiCrop } from "react-icons/ci";
+import { PiResizeThin } from "react-icons/pi";
+import { CiUndo } from "react-icons/ci";
 import Loader from './loader';
 
 
@@ -38,7 +42,7 @@ function AppOld() {
   const imageOverlayRef = useRef(null);
   const ctxRef = useRef(null);
   const [history, setHistory] = useState([]);
-  const [presentIndex, setPresentIndex] = useState(-1);
+  const [presentIndex, setPresentIndex] = useState(0);
 
   const addToHistory = (newImage) => {
     const newHistoy = {
@@ -46,10 +50,12 @@ function AppOld() {
       image: newImage,
       rotationAngle: rotationAngle
     }
-    const updatedHistory = history.slice(0, presentIndex + 1);
+    const updatedHistory = history;
     updatedHistory.push(newHistoy);
+    //history.push(newHistoy);
     setHistory(updatedHistory);
-    setPresentIndex(updatedHistory.length - 1);
+    setPresentIndex(presentIndex+1);
+    //alert(presentIndex);
   };
 
   const handleBrushColorChange = (e) => {
@@ -129,6 +135,7 @@ function AppOld() {
 
     // Convert the cropped canvas to a data URL and save it in the state
     const croppedImage = croppedCanvas.toDataURL();
+    addToHistory(croppedImage);
     setSelectedImage(croppedImage);
 
     // Update the main canvas with the cropped image
@@ -147,8 +154,9 @@ function AppOld() {
       setPresentIndex(presentIndex - 1);
       console.log("handle undo")
       setSelectedImage(history[presentIndex-1].image);
-      setRotationAngle(history[presentIndex-1].rotationAngle);
-      setOptions(history[presentIndex-1].options);
+      //setRotationAngle(history[presentIndex-1].rotationAngle);
+      setOptions(DEFAULT_OPTIONS);
+      //alert(presentIndex);
     }
   };
 
@@ -177,11 +185,18 @@ function AppOld() {
     };  
     //context.filter = getImageStyle(DEFAULT_OPTIONS).filter;
     const newCanvas = canvas.toDataURL();
-    addToHistory(newCanvas);
+    // addToHistory(newCanvas);
     //context.filter = getImageStyle(options).filter;
 
     //addToHistory(imageNoFilters.src);  
   }, [canvasWidth, canvasHeight, rotationAngle,selectedImage]);
+
+
+  // useEffect(() => {
+  //   const canvas=canvasRef.current;
+  //   const newCanvas = canvas.toDataURL();
+  //   addToHistory(newCanvas);
+  // }, [selectedImage]);
 
 
   useEffect(() => {
@@ -193,19 +208,31 @@ function AppOld() {
     imageWithFilters.src = selectedImage ? selectedImage : require('./tree.jpg');
     //context.filter = getImageStyle(DEFAULT_OPTIONS).filter;
     imageWithFilters.onload = () => {
+      context.filter = getImageStyle(DEFAULT_OPTIONS).filter;
+      console.log("options in useeffect only filter",options);
+      context.drawImage(imageWithFilters, 0, 0, canvasWidth, canvasHeight);
+      applyRotation(context, canvasWidth, canvasHeight, rotationAngle); // Apply rotation
+      console.log("use effect");
+    };  
+    //context.filter = getImageStyle(DEFAULT_OPTIONS).filter;
+    const newCanvas = canvas.toDataURL();
+    //addToHistory(newCanvas);
+    imageWithFilters.onload = () => {
       context.filter = getImageStyle(options).filter;
       console.log("options in useeffect only filter",options);
       context.drawImage(imageWithFilters, 0, 0, canvasWidth, canvasHeight);
       applyRotation(context, canvasWidth, canvasHeight, rotationAngle); // Apply rotation
       console.log("use effect");
     };
-    context.filter = getImageStyle(DEFAULT_OPTIONS).filter;
-    const newCanvas = canvas.toDataURL();
-    addToHistory(newCanvas);
-    context.filter = getImageStyle(options).filter;
 
     //addToHistory(imageNoFilters.src);  
   }, [options]);
+
+  // useEffect(()=>{
+  //   const canvas = canvasRef.current;
+  //   const newCanvas = canvas.toDataURL();
+  //   addToHistory(newCanvas); 
+  // },[selectedImage?.length])
   
 
   const handleSliderChange = ({ target }) => {
@@ -238,6 +265,11 @@ function AppOld() {
 
   const startDrawing = ({ nativeEvent }) => {
     if (!enableDraw) return;
+    if(history.length ==0){
+      const canvas = canvasRef.current;
+      const newCanvas = canvas.toDataURL();
+      addToHistory(newCanvas);
+    }
     const { offsetX, offsetY } = nativeEvent; 
     ctxRef.current.beginPath();   
     ctxRef.current.moveTo(offsetX, offsetY);   
@@ -264,7 +296,8 @@ function AppOld() {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     context.filter = getImageStyle(DEFAULT_OPTIONS).filter;
-    const drawnImage = canvas.toDataURL();  
+    const drawnImage = canvas.toDataURL(); 
+    addToHistory(drawnImage); 
     setSelectedImage(drawnImage);
   };
 
@@ -356,11 +389,12 @@ function AppOld() {
           />
         ))}
           <label className="file-upload">
-             Upload Image
+          <FaFileImage className='icon'/>
+             Upload Image 
             <input type="file" accept="image/*" onChange={handleImageChange} className="file-upload" />
             </label>
-        <button onClick={handleDownload} className='button'>Download Modified Image</button>
-        <button onClick={handleEnableDraw} className='button'>Drawing</button>
+        <button onClick={handleDownload} className='button'> <FaFileDownload className='icon'/> Download Modified Image</button>
+        <button onClick={handleEnableDraw} className='button'><PiScribbleThin className='icon' /> Drawing</button>
 
         <div>
           <label className='label'>
@@ -422,9 +456,9 @@ function AppOld() {
   className='input-field'
 />
 </div>
-<button onClick={() => handleResize(canvasWidth, canvasHeight)} className='button'>Resize Canvas</button>
-<button onClick={() => setIsCrropping(true)} className='button'>Crop</button>
-<button onClick={handleUndo} disabled={presentIndex <= 0} className='button'>Undo</button>
+<button onClick={() => handleResize(canvasWidth, canvasHeight)} className='button'> <PiResizeThin className='icon'/> Resize Canvas</button>
+<button onClick={() => setIsCrropping(true)} className='button'> <CiCrop className='icon'/> Crop</button>
+<button onClick={() => handleUndo()} disabled={presentIndex <= 0} className='button'> <CiUndo className='icon'/> Undo</button>
 {/* <button onClick={handleRedo} disabled={presentIndex >= history.length - 1}>Redo</button> */}
 
       </div>

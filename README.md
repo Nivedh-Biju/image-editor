@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Snap Shot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Snap Shot Application! This application allows you to upload images and apply various filters, draw on images, crop, resize, and even undo your edits.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Brightness Adjustment**
+- **Contrast Adjustment**
+- **Saturation Adjustment**
+- **Grayscale Filter**
+- **Sepia Filter**
+- **Image Rotation**
+- **Blur Filter**
+- **Draw on Image**
+- **Crop Image**
+- **Resize Image**
+- **Undo/Redo (History Functionality)**
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To get started with the application, clone the repository and install the dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/your-repo/image-editor.git
+cd image-editor
+npm install
+```
 
-### `npm test`
+## Running the Application
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After installing the dependencies, you can start the application using:
 
-### `npm run build`
+```bash
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open your browser and navigate to `http://localhost:3000` to see the application in action.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Uploading an Image
 
-### `npm run eject`
+To upload an image, click on the **Upload** button and select an image from your device.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![image](https://github.com/user-attachments/assets/1d96680c-5b74-4641-a298-39b8f03a32ba)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Applying Filters
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You can apply various filters to the image using the controls provided. Adjust the sliders to change the **Brightness**, **Contrast**, **Saturation**, **Grayscale**, **Sepia**, and **Blur** levels.
 
-## Learn More
+![image](https://github.com/user-attachments/assets/836f6105-be55-4eb1-906a-dfd38c90a028)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Drawing on Image
 
-### Code Splitting
+Select the **Draw** tool to start drawing on the image. You can choose different brush sizes and colors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![image](https://github.com/user-attachments/assets/3ba806e7-17be-4eb7-92c5-830c0a70f624)
+![image](https://github.com/user-attachments/assets/f6ebe604-2374-44bd-83f4-a79779278226)
+![image](https://github.com/user-attachments/assets/863cfeb2-902f-4fef-8570-4ccb98cd97f9)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### Cropping the Image
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Use the **Crop** tool to select the area you want to keep. Once you've made your selection, click the **Crop** button to apply the crop.
 
-### Advanced Configuration
+![image](https://github.com/user-attachments/assets/4e8659d3-235c-447a-8c51-e1054abbbe97)
+![image](https://github.com/user-attachments/assets/3ae069c1-5bac-4e52-b35a-c7a6b35413f9)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Resizing the Image
 
-### `npm run build` fails to minify
+To resize the image, enter the desired dimensions in the **Width** and **Height** fields and click **Resize**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](https://github.com/user-attachments/assets/8e75ebdc-6aec-4fe6-8782-5c41e2efffb0)
+
+
+### Rotating the Image
+
+Rotate the image by entering the angle of rotation or using the rotation slider.
+
+![image](https://github.com/user-attachments/assets/edb5c217-331c-4e1c-ab83-092909c22c28)
+![image](https://github.com/user-attachments/assets/a983300d-a7f9-481a-8bc7-3f144cf4403c)
+
+
+
+### Undo/Redo
+
+You can undo or redo your actions using the **Undo** and **Redo** buttons.
+![image](https://github.com/user-attachments/assets/0b859465-2743-4c72-905b-cc0f112cb75c)
+
+![image](https://github.com/user-attachments/assets/94d1f980-df05-4d38-995d-7f872106e85e)
+
+
